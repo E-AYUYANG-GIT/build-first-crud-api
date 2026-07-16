@@ -219,4 +219,6 @@ This project helped me understand:
 
 ---
 
+Note (Windows Users): Some curl commands in the assignment may not work correctly in Windows PowerShell. If you encounter issues, use Invoke-RestMethod or test the API through Swagger UI (/docs).
+
 Created as part of the **FlyRank Backend Internship – Week 2 Assignment**.

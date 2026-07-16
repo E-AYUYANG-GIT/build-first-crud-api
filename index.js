@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json')
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
+
 let tasks = [
     {"id": 1, "title": "Product Inventory", "done": true},
     {"id": 2, "title": "Patient Records", "done": true},
@@ -73,9 +77,9 @@ app.put('/tasks/:id', (req, res) => {
     
     if (
         (title === undefined && done === undefined) ||
-        (title === undefined || title.trim() === "")
+        (title !== undefined && title.trim() === "")
     ) {
-        return res.status(400).json({error: "Empty/Invalid Id"});
+        return res.status(400).json({ error: "Empty/Invalid Body" });
     }
     if (title !== undefined){
         findTask.title = title;
@@ -97,7 +101,7 @@ app.delete('/tasks/:id', (req, res) => {
     
     tasks.splice(taskIndex, 1);
 
-    res.status(204).json({error: "No Content - Success"})
+    res.sendStatus(204);
 });
 
 
